@@ -13,9 +13,9 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: 'root1234'
     username: 'root'
-    url: jdbc:mysql://localhost:3306/spotity_playlist?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    password: 'root1234'
+    url: jdbc:mysql://localhost:3306/spotify_playlist?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
 logging:
   level:
     org:
