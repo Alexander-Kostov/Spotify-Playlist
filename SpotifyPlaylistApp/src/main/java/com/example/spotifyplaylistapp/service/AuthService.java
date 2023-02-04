@@ -21,7 +21,7 @@ public class AuthService {
         this.loggedUser = loggedUser;
     }
 
-    public boolean UserLoggedIn(){
+    public boolean userLoggedIn(){
         return this.loggedUser.getId() > 0;
     }
 

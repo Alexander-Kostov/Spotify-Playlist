@@ -1,6 +1,8 @@
 package com.example.spotifyplaylistapp.controller;
 
 import com.example.spotifyplaylistapp.model.dtos.AddSongDTO;
+import com.example.spotifyplaylistapp.service.AuthService;
+import com.example.spotifyplaylistapp.service.SongService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,14 @@ import javax.validation.Valid;
 @Controller
 public class SongController {
 
+    private SongService SongService;
+    private AuthService authService;
+
+    public SongController(SongService songService, AuthService authService) {
+        SongService = songService;
+        this.authService = authService;
+    }
+
     @ModelAttribute("addSongDTO")
     public AddSongDTO addSongDTO(){
         return new AddSongDTO();
@@ -20,6 +30,10 @@ public class SongController {
 
     @GetMapping("/songs/add-song")
     public String addSong(){
+
+        if(!this.authService.userLoggedIn()){
+            return "redirect:/";
+        }
         return "song-add";
     }
 
@@ -27,6 +41,9 @@ public class SongController {
     public String addSong(@Valid AddSongDTO addSongDTO,
                           BindingResult bindingResult,
                           RedirectAttributes redirectAttributes){
+        if(!this.authService.userLoggedIn()){
+            return "redirect:/";
+        }
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("addSongDTO", addSongDTO);
@@ -34,6 +51,8 @@ public class SongController {
 
             return "redirect:/songs/add-song";
         }
+
+        this.SongService.addSong(addSongDTO);
 
         return "redirect:/home";
 

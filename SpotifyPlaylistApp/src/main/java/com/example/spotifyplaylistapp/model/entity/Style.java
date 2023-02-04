@@ -11,7 +11,7 @@ public class Style {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
     private StyleName name;
@@ -27,11 +27,11 @@ public class Style {
 
     public Style() {}
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public Style setId(long id) {
+    public Style setId(Long id) {
         this.id = id;
         return this;
     }

@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @Controller
 public class AuthController {
 
-    private com.example.spotifyplaylistapp.service.AuthService authService;
+    private AuthService authService;
 
     public AuthController(AuthService authService) {
         this.authService = authService;
@@ -33,11 +33,18 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login(){
+        if(this.authService.userLoggedIn()){
+            return "redirect:/home";
+        }
+
         return "login";
     }
 
     @GetMapping("/register")
     public String register(){
+        if(this.authService.userLoggedIn()){
+            return "redirect:/home";
+        }
 
         return "register";
     }
@@ -46,6 +53,10 @@ public class AuthController {
     public String register(@Valid RegisterDTO registerDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
+
+        if(this.authService.userLoggedIn()){
+            return "redirect:/home";
+        }
 
         if(bindingResult.hasErrors() || !this.authService.register(registerDTO)){
             redirectAttributes.addFlashAttribute("registerDTO", registerDTO);
@@ -62,6 +73,10 @@ public class AuthController {
     public String login(@Valid LoginDTO loginDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes){
+
+        if(this.authService.userLoggedIn()){
+            return "redirect:/home";
+        }
 
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("loginDTO", loginDTO);

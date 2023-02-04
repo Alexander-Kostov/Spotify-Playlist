@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class StyleSeeder implements CommandLineRunner {
-
     private StyleRepository styleRepository;
 
     public StyleSeeder(StyleRepository styleRepository) {

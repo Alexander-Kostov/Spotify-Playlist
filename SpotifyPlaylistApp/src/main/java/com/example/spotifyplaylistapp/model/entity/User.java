@@ -9,7 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(unique = true, nullable = false)
     private String username;
     @Column(nullable = false)
@@ -17,18 +17,18 @@ public class User {
     @Column(unique = true, nullable = true)
     private String email;
 
-    @ManyToMany()
-    @JoinTable( name = "users_songs",
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_songs",
             joinColumns = @JoinColumn(name = "fk_user"),
             inverseJoinColumns = @JoinColumn(name = "fk_song")
     )
     private Set<Song> playlist;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public User setId(long id) {
+    public User setId(Long id) {
         this.id = id;
         return this;
     }
@@ -67,5 +67,13 @@ public class User {
     public User setPlaylist(Set<Song> songs) {
         this.playlist = songs;
         return this;
+    }
+
+    public void removeSongFromPlaylist(Long songId) {
+        this.playlist.removeIf(s -> s.getId().equals(songId));
+    }
+
+    public void removeAllSongs() {
+        this.playlist.clear();
     }
 }

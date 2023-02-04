@@ -17,7 +17,7 @@ public class AddSongDTO {
     private String title;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @PastOrPresent
+    @PastOrPresent()
     private LocalDate releaseDate;
 
     @Positive

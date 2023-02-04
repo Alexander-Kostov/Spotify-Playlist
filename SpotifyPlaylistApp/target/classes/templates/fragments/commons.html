@@ -18,15 +18,15 @@
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
 
-                <li class="nav-item col-md-4">
+                <li th:if="${!@authService.userLoggedIn()}" class="nav-item col-md-4">
                     <a class="nav-link text-white active h5" href="/login">Login</a>
                 </li>
 
-                <li class="nav-item col-md-4">
+                <li th:if="${!@authService.userLoggedIn()}" class="nav-item col-md-4">
                     <a class="nav-link text-white active h5" href="/register">Register</a>
                 </li>
 
-                <li class="nav-item col-md-4">
+                <li th:if="${@authService.userLoggedIn()}" class="nav-item col-md-4">
                     <a class="nav-link text-white active h5" href="/logout">Logout</a>
                 </li>
 

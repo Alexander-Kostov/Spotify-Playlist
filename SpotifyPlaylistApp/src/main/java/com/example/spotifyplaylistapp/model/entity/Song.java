@@ -14,7 +14,7 @@ public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private String performer;
     @Column(nullable = false)
@@ -33,11 +33,11 @@ public class Song {
     @ManyToMany(mappedBy = "playlist")
     private Set<User> users;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public Song setId(long id) {
+    public Song setId(Long id) {
         this.id = id;
         return this;
     }
