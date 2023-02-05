@@ -13,6 +13,6 @@ import java.util.List;
 public interface SongRepository extends JpaRepository<Song, Long> {
     List<Song> findByStyleName(StyleName pop);
 
-    @Query("SELECT s, u FROM Song s join s.users u on u.id = :id")
+    @Query("SELECT s FROM Song s join s.users u on u.id = :id")
     List<Song> findByUserId(long id);
 }
